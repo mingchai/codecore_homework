@@ -1,4 +1,4 @@
-# Homework Assignment for Ming Chai - November 2018 Bootcamp
+# Homework Assignment for Ming Chai for November 2018 Bootcamp
 
 This repo contains the homework assignment for Ming Chai for the November 2018 Bootcamp.
 
