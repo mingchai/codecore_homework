@@ -42,3 +42,11 @@ function drawBottomLine(num){
 }
 
 console.log(drawBottomLine(userInput));
+
+
+// ------- DRAW BARS AROUND -------
+function drawBarsAround(string){
+    console.log('\u2503' + string + '\u2503')
+}
+
+drawBarsAround('This is a string');
