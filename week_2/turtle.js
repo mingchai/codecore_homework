@@ -8,14 +8,13 @@ let turtle = new Turtle(0,0); //could be any coordinates
     let newArr = [];
     Turtle.prototype.forward = function (num){ 
         for(let stepCount = 0; stepCount < num + 1; stepCount++){
-            newArr.push(this.x + stepCount, this.y);
-            console.log(newArr)
+            newArr.push([this.x + stepCount, this.y]);
         }
-        // return new Turtle(this.x + num, this.y);
+        console.log(newArr); //test
     };
 
     Turtle.prototype.right = function(){
-        this.x += 0;
+        this.x + 0;
     };
 
     Turtle.prototype.left = function(){
