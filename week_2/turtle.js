@@ -9,7 +9,7 @@ class Turtle{
 		
     forward(num){
 	
-        for(let stepCount = 0; stepCount < num+1; stepCount++){
+        for(let stepCount = 0; stepCount < num; stepCount++){
             if(this.turtleCompass == 90 || this.turtleCompass == -270){
                 this.turtleTravelLog.push([this.x, this.y += 1]);
             } else if(this.turtleCompass == 0){
@@ -43,8 +43,11 @@ class Turtle{
         return this.turtleTravelLog;
     }
 };
-let turtle = new Turtle(0,0)
+let turtle = new Turtle(5,2)
 // console.log(turtle.forward(4));
 // console.log(turtle.forward(4).right().forward(4));
 // console.log(turtle.forward(4).left().forward(4));
-console.log(turtle.forward(4).left().forward(4).allPoints());
+// console.log(turtle.forward(4).left().forward(4).allPoints());
+console.log(turtle.forward(4).left().forward(4).left().left().forward(1));
+
+// Triple for loop required for mapping - double for to compare values, another to map
