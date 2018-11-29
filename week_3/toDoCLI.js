@@ -1,20 +1,11 @@
-const net = require("net");
+// ----- LOAD REQUIRED MODULES -----
+const readline = require("readine");
+const fs = require("fs");
 
-const server = net.createServer(socket =>{
-    console.log("Request received from client");
-
-    socket.on("data", data =>{
-        console.log("Item to be added to client's to-do list! \n", data.toString());
-
-        let item = data.toString();
-
-        socket.write(`The following item has been added to you list: \n
-        ${item}`);
-
-    });
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
 });
 
-const PORT = 5050;
-server.listen(PORT, 'localhost', () => {
-    console.log(`The server is now listening at port ${PORT}.`);
-});
+// ----- HOMEPAGE VIEW -----
+rl.question("Welcome to Todo CLI! \n -------------------- \n (v) View • (n) New • (cX) Complete • (dX) Delete • (q) Quit", answer);
