@@ -69,19 +69,25 @@ app.get("/index/:id", (req, res)=>{;
     knex.select('*').from('teams').where({id: id}).first().then(teamData =>{
             // console.log(teamData.members);
             let revCohortData = shuffle(teamData.members.split(","));
+            let theSplit = Math.ceil(revCohortData.length/quant);
             let teamsArray = [];
-            if(splitType == "teamCount"){
+            if(splitType == "numPerTeam"){
                 // console.log("Team Count!");
                 
 
-                for (let i = 0; i < quant; i++){
+                for (let i = 0; i < theSplit; i++){
 	                teamsArray.push([])
                 };
 
                 while(revCohortData.length > 0){
-                    for (let i = 0; i < quant; i++){
+                    for (let i = 0; i < teamsArray.length; i++){
                         if(revCohortData.length > 0){
-                            teamsArray[i].push(revCohortData.pop())
+                            for(let j = 0; j < quant; j ++){
+                                if(revCohortData.length > 0){
+                                    teamsArray[i].push(revCohortData.pop())
+                                }
+                            }
+                           
                         } else {
                             break
                         }
@@ -89,8 +95,22 @@ app.get("/index/:id", (req, res)=>{;
                 }
 
                 // console.log(typeof(teamsArray))
-            } else if(splitType == "numPerTeam"){
-                console.log("Per Team!");
+            } else if(splitType == "teamCount"){
+
+                for(let i = 0; i < quant; i++){
+                    teamsArray.push([]);
+                }
+                
+                while(revCohortData.length > 0){
+                    for (let i = 0; i < teamsArray.length; i++){
+                        if(revCohortData.length > 0){
+                            teamsArray[i].push(revCohortData.pop())
+                        } else {
+                            break
+                        }
+                    }
+                }
+                // console.log("Per Team!");
             };
             // res.cookie("quant", quant)
             res.render("show", {teamData, splitType, revCohortData, teamsArray});
