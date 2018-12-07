@@ -8,6 +8,17 @@ app.use(logger("dev"));
 app.set("view engine", "ejs");
 app.use(express.urlencoded({extended: false}));
 
+app.use((req,res,next)=>{
+    const quant = res.cookie.quant;
+    res.cookie("quant", quant);
+    res.locals.quant = "";
+    if(quant){
+        res.locals.quant = quant;
+        console.log(quant);
+    }
+    next();
+})
+
 app.get("/", (req,res)=>{
     res.render("homePage");
 });
@@ -47,6 +58,53 @@ app.get("/index", (req, res)=>{
 
 })
 
+app.get("/index/:id", (req, res)=>{;
+    const id = req.params.id;
+    const splitType = req.query.teamSplit;
+    const teamQuant = req.query.teamQuant;
+    const quant = req.query.quant;
+    // console.log(splitType);
+    // console.log(teamQuant)
+    // console.log(quant);
+    knex.select('*').from('teams').where({id: id}).first().then(teamData =>{
+            // console.log(teamData.members);
+            let revCohortData = shuffle(teamData.members.split(","));
+            let teamsArray = [];
+            if(splitType == "teamCount"){
+                // console.log("Team Count!");
+                
+
+                for (let i = 0; i < quant; i++){
+	                teamsArray.push([])
+                };
+
+                while(revCohortData.length > 0){
+                    for (let i = 0; i < quant; i++){
+                        if(revCohortData.length > 0){
+                            teamsArray[i].push(revCohortData.pop())
+                        } else {
+                            break
+                        }
+                    }
+                }
+
+                // console.log(typeof(teamsArray))
+            } else if(splitType == "numPerTeam"){
+                console.log("Per Team!");
+            };
+            // res.cookie("quant", quant)
+            res.render("show", {teamData, splitType, revCohortData, teamsArray});
+        });
+});
+
+app.post("/index/:id", (req, res) =>{
+    const quant = req.cookie.quant;
+    // console.log(quant)
+    
+    res.redirect("/index/:id", {quant})
+})
+
+
 // SERVER SETUP
 const PORT = 5670;
 const HOST = 'localhost';
@@ -56,4 +114,4 @@ app.listen(PORT, HOST, err =>{
     } else {
         console.log(`Server is now listening at http://${HOST}:${PORT}`);
     }
-})
+});
