@@ -3,6 +3,16 @@ const logger = require("morgan");
 const app = express();
 const knex = require("./db/client");
 const shuffle = require("shuffle-array");
+const methodOverride = require("method-override");
+
+app.use(                                    
+    methodOverride((req, res) => {
+      if (req.body && req.body._method) {
+        const method = req.body._method;
+        return method;
+      }
+  }),
+);
 
 app.use(logger("dev"));
 app.set("view engine", "ejs");
@@ -73,8 +83,6 @@ app.get("/index/:id", (req, res)=>{;
             let teamsArray = [];
             if(splitType == "numPerTeam"){
                 // console.log("Team Count!");
-                
-
                 for (let i = 0; i < theSplit; i++){
 	                teamsArray.push([])
                 };
@@ -112,18 +120,58 @@ app.get("/index/:id", (req, res)=>{;
                 }
                 // console.log("Per Team!");
             };
-            // res.cookie("quant", quant)
+            res.cookie("quant", quant)
             res.render("show", {teamData, splitType, revCohortData, teamsArray});
         });
 });
 
 app.post("/index/:id", (req, res) =>{
-    const quant = req.cookie.quant;
+    const quant = req.query.quant;
     // console.log(quant)
     
-    res.redirect("/index/:id", {quant})
+    res.redirect("/index/:id")
 })
 
+app.get('/:id/edit', (req, res)=>{
+    const id = req.params.id
+    knex   
+        .select("*")
+        .from("teams")
+        .where({ id: id})
+        .first()
+        .then((team)=>{
+            res.render('edit', {team}) 
+        });
+});
+
+app.patch('/:id', (req, res)=>{
+    const quant = req.cookie.quant;
+    const id = req.params.id  
+    knex
+        .select("*")
+        .from("teams")
+        .where({ id:id })
+        .update({
+            logoUrl: req.body.logoUrl,
+            name: req.body.name,
+            members: req.body.members
+        })
+        .then((team)=>{
+            res.redirect(`/index/<%=${team.id}%>`, {quant})
+        });
+
+        router.delete('/:id', (req, res)=>{
+            const id = req.params.id
+            knex   
+                .select("*")
+                .from("teams")
+                .where({ id: id})
+                .del()
+                .then(()=>{
+                    res.redirect('/index')  
+                });
+        });
+});
 
 // SERVER SETUP
 const PORT = 5670;
