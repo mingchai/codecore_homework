@@ -1,0 +1,26 @@
+<%- include("./partials/header") %>
+<div class="container">
+    <form action="/teams/<%=team.id%>" method="patch">
+        <input type="hidden" name="_method" value="PATCH">
+            
+        <div class="form-group">
+            <label for="exampleFormControlInput1">Logo Url</label>
+            <input type="text" name="logoUrl" class="form-control" id="exampleFormControlInput1" value="<%= team.logoUrl%>"> 
+        </div>
+
+        <div class="form-group">
+            <label for="exampleFormControlInput1">Name</label>
+            <input type="text" name="name" class="form-control" id="exampleFormControlInput1" value="<%= team.name %>" >
+        </div>
+
+        <div class="form-group">
+            <label for="exampleFormControlTextarea1">Members</label>
+            <textarea name="members"class="form-control" id="exampleFormControlTextarea1" rows="3"><%= team.members %></textarea>
+        </div>        
+        <div class="d-flex justify-content-end">
+            <input class="btn btn-primary btn-outline-primary mt-3" type="submit" value="Edit Cohort">
+        </div>
+        </div>
+    </form>
+</div>
+<%- include("./partials/footer") %>

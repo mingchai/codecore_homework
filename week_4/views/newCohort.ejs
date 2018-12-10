@@ -1,0 +1,23 @@
+<%- include("./partials/header") %>
+<form action="/teams/new_cohort" method="post" class="m-4">
+    <div class="form-group">
+        <label for="logo"> Logo Url </label>
+        <br>
+        <input type="text" name="logoUrl" placeholder="http://examplewebsite.com" class="form-control">
+    </div>
+    <br>
+    <div class="form-group">
+        <label for="logo"> Name </label>
+        <br>
+        <input type="text" name="name" placeholder="Masters of the Universe" class="form-control">
+    </div>
+    <br>
+    <div class="form-group">
+        <label for="logo"> Members </label>
+        <br>
+        <textarea name="members" id="" cols="30" rows="10" placeholder="Sally, Johnny, Rambo, Duke" class="form-control"></textarea>
+    </div>
+    <br>
+    <input type="submit" class="btn btn-outline-primary float-right">
+</form>
+<%- include("./partials/footer") %>
