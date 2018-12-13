@@ -1,0 +1,60 @@
+<%- include("./partials/header") %>
+<div class="card">
+    <div class= "card-body">
+<h1><%= teamData.name %></h1>
+
+<p><%= teamData.members %></p>
+
+<hr>
+<p> Method </p>
+
+<form action="/teams/<%=teamData.id%>" method="GET">
+    <input type="radio" name="teamSplit" value="teamCount"> Team Count
+    <br>
+    <input type="radio" name="teamSplit" value="numPerTeam"> Number Per Team
+    <br>
+    <br>
+  
+    Quantity <input type="number" id="method" name="quant">
+    <br>
+    <br>
+    <%if(splitType == undefined){ %>
+    <button type = submit name="teamQuant" class="btn btn-primary"">Assign Teams</button>
+    
+    <hr>
+    <% } %>
+</form>
+<br>
+<% if(splitType == "teamCount" || splitType == "numPerTeam"){ %>
+<button class="btn btn-primary" onClick="window.location.reload()" >Assign Teams</button>
+<hr>
+    <% teamsArray.forEach(group =>{ %>
+
+<br>
+
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <div class="card-title"> Team # <%= teamsArray.id %>
+    <p class="card-text"> <%= group %> </p>
+    </div>
+  </div>
+</div>
+
+
+<br>
+<br>
+    <% }) %>
+<br>
+
+<% } %>
+    <form class="form-group" action="/teams/<%= teamData.id%>" method ="POST">
+        <input type="hidden" name="_method" value="DELETE" >
+        <input type="submit" value ="Delete Cohort" class="btn btn-primary">  
+    </form>
+<div>
+    <a class="btn btn-primary" href="/teams/<%= teamData.id%>/edit">Edit Cohort</a>
+        </div>
+    </div>
+</div>
+
+<%- include("./partials/footer") %>
