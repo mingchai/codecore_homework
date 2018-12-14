@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <title>Flex Properties</title>
+    <link rel="stylesheet" href="css/index.css" type="text/css" media="screen" charset="utf-8">
+    <style>
+      .flex-me {
+        display: flex;
+        background-color: azure;
+        border: thin solid teal;
+        border-radius: 5px;
+        min-height: 150px;
+      }
+
+      .flex-me > div {
+        width: 150px;
+        min-height: 75px;
+        background-color: teal;
+        border-radius: 5px;
+      }
+
+      .flex-me > div:nth-child(2n) {
+        background-color: firebrick;
+        min-height: 100px;
+      }
+
+      .flex-me.flex-wrap-demo {
+        width: 50%;
+        min-height: 300px;
+      }
+
+      .flex-me.align-content-demo {
+        width: 50%;
+        min-height: 300px;
+      }
+
+      .num {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .num:after {
+        content: '0';
+        color: white;
+        font-size: 3em;
+      }
+
+      .num.one:after { content: '1'; }
+      .num.two:after { content: '2'; }
+      .num.three:after { content: '3'; }
+      .num.four:after { content: '4'; }
+      .num.five:after { content: '5'; }
+
+    </style>
+  </head>
+
+  <body>
+    <h1>Flex Properties</h1>
+
+    <h2>Flex Item</h2>
+    <h3>Default</h3>
+    <div class="flex-me">
+      <div class="num"></div>
+      <div class="num one"></div>
+      <div class="num two"></div>
+      <div class="num three"></div>
+      <div class="num four"></div>
+      <div class="num five"></div>
+    </div>
+
+    <!--
+      By default, all flex items have an `order` value of 0. Negative values
+      are allowed. Items with a smaller `order` placed at the beginning while
+      items with a larger at placed at the end. For items with same `order`, the
+      placement is based in their location the code.
+    -->
+    <h3>order</h3>
+    <pre><strong>order:</strong> [any integer];</pre>
+    <div class="flex-me">
+      <div class="num"></div>
+      <div class="num one" style='order:1'></div>
+      <div class="num two"></div>
+      <div class="num three"></div>
+      <div class="num four"></div>
+      <div class="num five" style="order: -1"></div>
+    </div>
+
+    <!-- As the window grows, the affected item will take more space (it gets scaled along the flex direction to take the available whitespace). The value affects who gets priority to take up space, first. Larger values take up more space By default the flex-grow is 0 (disabling this feature). -->
+    <h3>flex-grow</h3>
+    <pre><strong>flex-grow:</strong> [any integer];</pre>
+    <div class="flex-me">
+      <div class="num" style="flex-grow: 1"></div>
+      <div class="num one" style="flex-grow: 1"></div> <!--takes up 1/5 of remaining whitespace-->
+      <div class="num two"style="flex-grow: 3"></div> <!--takes up 3/5 of the remaining white space (5 b/c 1 + 1 + 3 = 5-->
+      <div class="num three"></div><!--takes up 0/5 of the remaining whitespace-->
+      <div class="num four"></div>
+      <div class="num five"></div>
+    </div>
+<!-- by default all flex items have a flex-shrink of 1. This means that flex items will shrink to fit inside their flex container. If you disable it, the itme won't scale down as the window shrinks. Larger values will cause the item to shrink/collapse faster-->
+    <h3>flex-shrink</h3>
+    <pre><strong>flex-shrink:</strong> [any integer];</pre>
+    <div class="flex-me">
+      <div class="num"></div>
+      <div class="num one" style="flex-shrink: 0"></div>
+      <div class="num two" style="flex-shrink: 4"></div>
+      <div class="num three" style="flex-shrink: 8"></div>
+      <div class="num four"></div>
+      <div class="num five"></div>
+    </div>
+<!-- controls scale along the direction of the flex container. i.e.) if the flex container is a row, it will control the width. If the flex container is a column, it will then control the height -->
+    <h3>flex-basis</h3>
+    <pre><strong>flex-basis:</strong> [any unit] | 0 | auto;</pre>
+    <div class="flex-me"> <!--use style="flex-direction: column" to see the effects-->
+      <div class="num"></div>
+      <div class="num one" style="flex-basis: 250px"></div>
+      <div class="num two"></div>
+      <div class="num three"></div>
+      <div class="num four"></div>
+      <div class="num five"></div>
+    </div>
+    <!-- like align-content, but on a per item basis (i.e. it affects each item, rather than the container). aligns each item relative to something else, therefore it's customizable. -->
+    <h3>align-self</h3>
+    <pre><strong>align-self:</strong> stretch | flex-start | flex-end | center | baseline;</pre>
+    <div class="flex-me">
+      <div class="num" style='align-self: stretch'></div>
+      <div class="num one" style='align-self: flex-start'></div>
+      <div class="num two" style='align-self: flex-end'></div>
+      <div class="num three" style='align-self: center'></div>
+      <div class="num four" style='align-self: baseline'></div> <!--baseline aligns the bottom of the content with other children aligned to baseline, but not the border of the box the characters are within (green and red are different dimentions). Useful for creating a 'wild topography' style while still having the title aligned-->
+      <div class="num five" style='align-self: baseline'></div>
+    </div>
+  </body>
+</html>
