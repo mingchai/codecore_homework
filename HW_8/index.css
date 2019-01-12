@@ -1,0 +1,11 @@
+div{
+    display: flex;
+}
+
+div > div{
+    border: solid thin black;
+    border-radius: 25%;
+    /* display: flex; */
+    margin: 5px;
+    padding: 20px;
+}
