@@ -1,7 +1,7 @@
 for(let i = 0; i < 26; i++){
     
     let divs = document.createElement("div");
-    let letter = (i+10).toString(36);
+    let letter = (i+10).toString(36).toUpperCase();
     divs.innerText = letter;
     // divs.outerHTML("div");
     // divs.innerHTML = "<div>";
