@@ -11,8 +11,23 @@ for(let i = 0; i < 26; i++){
     document.querySelector("div").append(divs);
 }
 
-document.querySelectorAll("div > div").forEach( div =>{
-    div.addEventListener("click", event => {
-        console.log(event.currentTarget.style.backgroundColor = "red");
-    })
-})
+function select(){
+    document.querySelectorAll("div > div").forEach( div =>{
+        div.addEventListener("click", event => {
+            let selectedLetter = event.currentTarget;
+            
+            
+            if(selectedLetter.className == "selected"){
+                selectedLetter.classList.remove("selected");
+                selectedLetter.style.backgroundColor = "red";
+            } else {
+                selectedLetter.classList.add("selected");
+                selectedLetter.style.backgroundColor = "";
+            }
+            
+        })
+    });
+}
+
+select();
+
