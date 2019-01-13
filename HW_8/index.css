@@ -3,12 +3,23 @@
     flex-wrap: wrap;
 }
 
-div > div{
+#letterBoxes > div{
     border: solid thin black;
-    border-radius: 25%;
+    border-radius: 15%;
     margin: 5px;
     padding: 15px;
-
+    font-size: 1rem;
     text-align: center;
     width: 10%; height: 10%;
+    transition: transform 1000ms 0ms;
+}
+
+.selected{
+    background-color: red;
+    color: white;
+}
+
+.dashed {
+    display: inline;
+    text-align: center;
 }
