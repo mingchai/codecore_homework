@@ -19,7 +19,7 @@
     color: white;
 }
 
-.dashed {
+#letterInput > div {
     /* display: inline; */
     text-align: center;
     border-bottom: solid thin black;

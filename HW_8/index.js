@@ -11,45 +11,41 @@ function letterGenerator(){
 
 letterGenerator();
 
-let secretWord = "test".toUpperCase();
+const secretWord = "test".toUpperCase();
 
-function blankDashGen(){
-    // let span = document.createElement("span");
-    // document.querySelector("#letterInput").append(span);
-    
+function blankGenerator(){
     for(let i = 0; i < secretWord.length; i++){
         const dashes = document.createElement("div");
         dashes.innerText = ' ';
-        dashes.classList.add("dashed");
-        dashes.setAttribute("id", i);
+        dashes.classList.add(`dashed-${i}`);
+        // dashes.setAttribute("id", `ltr`);
         document.querySelector("#letterInput").append(dashes);
     };
 }
 
-blankDashGen();
+blankGenerator();
 
 function select(){
     document.querySelectorAll("#letterBoxes > div").forEach( div =>{
         div.addEventListener("click", event => {
-            let selectedLetter = event.currentTarget;
+            let selection = event.currentTarget;
+            let selectedLetter = event.currentTarget.innerText;
             
             // change color of selected letter
-            if(selectedLetter.className == "selected"){
-                selectedLetter.classList.remove("selected");
+            if(selection.className == "selected"){
+                selection.classList.remove("selected");
             } else {
-                selectedLetter.classList.add("selected");
-                selectedLetter.classList.remove("style");
+                selection.classList.add("selected");
+                selection.classList.remove("style");
             }
 
-            let selection = Array.from(document.querySelectorAll(".selected"));
-            for(let obj of selection){
-                console.log(obj.innerText);
-                console.log(event.target.innerText);
-                if(event.target.innerText == "t"){
-                    let x = document.querySelector("#dashed")
-                        dashes.innerText = secretWord[0];
-                    }
+            // Compare target to secret word
+            for(let i = 0; i < secretWord.length; i++){
+                if(selectedLetter == secretWord[i]){
+                    document.querySelector(`.dashed-${i}`).innerText = secretWord[i];
+                }
             }
+            
         })
     });
 };
