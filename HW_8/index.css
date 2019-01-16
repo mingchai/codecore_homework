@@ -31,6 +31,12 @@
     margin-right: 5px;
 }
 
+.blank{
+    text-align: center;
+    width: 25px;
+    margin-right: 5px;
+}
+
 #letterInput{
     justify-content: center;
 }

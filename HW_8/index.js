@@ -11,12 +11,14 @@ function letterGenerator(){
 };
 
 letterGenerator();
-
-const secretWord = "testing".toUpperCase();
+const words = ['gobble', 'testing', 'lucky', 'another'];
+const randomizer = Math.floor(Math.random() * words.length);
+let secretWord = words.splice(randomizer,1).toString().toUpperCase();
 
 function blankGenerator(){
     for(let i = 0; i < secretWord.length; i++){
         const dashes = document.createElement("div");
+
         dashes.innerText = ' ';
         dashes.classList.add(`dashed-${i}`);
         
