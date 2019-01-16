@@ -4,7 +4,6 @@
 }
 
 #letterBoxes > div{
-    border: solid thin black;
     border-radius: 15%;
     margin: 5px;
     padding: 15px;
@@ -15,6 +14,11 @@
 }
 
 .selected{
+    background-color: red;
+    color: white;
+}
+
+.correct{
     background-color: red;
     color: white;
 }
