@@ -65,7 +65,6 @@ function select(){
             let correctAnswers = document.querySelectorAll("#letterInputs > div");
             let incorrectState = document.querySelector("img").getAttribute("src");
             
-            
             correctAnswers.forEach(answer =>{
                 if(answer.innerText){
                     totalCorrect++;
@@ -73,13 +72,11 @@ function select(){
             });
 
             if(totalCorrect == secretWord.length){
-                // console.log("Game Won");
-                alert("You've Won!");
-                location.reload();
+                setTimeout(() => {alert("You've Won!")}, 500);
+                setTimeout(() =>{location.reload()}, 1000);
             } else if(incorrectState == img6){
-                // console.log("Game lost");
-                alert("Better luck next time...")
-                location.reload();
+                setTimeout(() => {alert("Better luck next time...")}, 500);
+                setTimeout(() =>{location.reload()}, 1000);
             }
         });
     });
