@@ -10,7 +10,7 @@
     padding: 15px;
     font-size: 1rem;
     text-align: center;
-    width: 10%; height: 10%;
+    width: 51px; height: 56px;
     transition: transform 1000ms 0ms;
 }
 
@@ -20,6 +20,13 @@
 }
 
 .dashed {
-    display: inline;
+    /* display: inline; */
     text-align: center;
+    border-bottom: solid thin black;
+    width: 25px;
+    margin-right: 5px;
+}
+
+#letterInput{
+    justify-content: center;
 }
