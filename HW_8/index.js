@@ -27,7 +27,7 @@ function blankGenerator(){
 blankGenerator();
 
 function select(){
-
+    let totalCorrect = 0;
     const img = "./assets/gallows.jpg"
     const img1 = "./assets/head.jpg";
     const img2 = "./assets/torso.jpg";
@@ -51,7 +51,8 @@ function select(){
             for(let i = 0; i < secretWord.length; i++){
                 if(selectedLetter == secretWord[i]){
                     document.querySelector(`.dashed-${i}`).innerText = secretWord[i];
-                    selection.setAttribute("class", "correct")
+                    selection.setAttribute("class", "correct");
+                    totalCorrect++;
                 } 
             };
 
@@ -60,6 +61,26 @@ function select(){
 			console.log("​select -> mistakes", mistakes)
             document.querySelector("img").setAttribute("src", `${images[mistakes]}`);
             
+            // Set win and loss conditions
+            let correctAnswers = document.querySelectorAll("#letterInputs > div");
+            let incorrectState = document.querySelector("img").getAttribute("src");
+            
+            
+            correctAnswers.forEach(answer =>{
+                if(answer.innerText){
+                    totalCorrect++;
+                }
+            });
+
+            if(totalCorrect == secretWord.length){
+                // console.log("Game Won");
+                alert("You've Won!");
+                location.reload();
+            } else if(incorrectState == img6){
+                // console.log("Game lost");
+                alert("Better luck next time...")
+                location.reload();
+            }
         });
     });
 };
